@@ -1,0 +1,46 @@
+{
+  "name": "turborepo-nextjs-storybook-headless-cms-starter",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.17.1"
+  },
+  "packageManager": "yarn@1.22.19",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --concurrency 24",
+    "dev:docs": "yarn workspace docs dev:docs",
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,md,mdx}\"",
+    "eslint:format": "turbo run eslint:format --concurrency 24",
+    "prepare": "husky install",
+    "codegen": "turbo run codegen",
+    "storyblok:setup": "yarn workspace @natu/storyblok-setup setup",
+    "storybook": "yarn workspace @natu/storybook-ui storybook",
+    "storybook:build": "yarn workspace @natu/storybook-ui storybook:build"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "prettier": "^3.0.3",
+    "tsconfig": "*",
+    "turbo": "1.12.5"
+  },
+  "lint-staged": {
+    "apps/**/*": [
+      "yarn prettier:format",
+      "eslint --fix --ext js,ts,jsx,tsx,md,mdx"
+    ],
+    "packages/**/*": [
+      "yarn prettier:format",
+      "eslint --fix --ext js,ts,jsx,tsx,md,mdx"
+    ],
+    "*.json": [
+      "yarn prettier:format"
+    ]
+  }
+}
